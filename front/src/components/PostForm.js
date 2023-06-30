@@ -25,7 +25,8 @@ function PostForm(){
             postContents:text,
             hashtag,
             comments:[],
-            liked:[]
+            liked:[],
+            share:[],
         }))
         setText('');
         setHashTag('');

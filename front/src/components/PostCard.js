@@ -79,16 +79,14 @@ const ButtonItem=styled.div`
 function PostCard(props){
     const [like,setLike] = useState(false);
     const [commentLoad,setCommendLoad] = useState(false);
+    const [shareToggle,setShareToggle]=useState(false);
     const nowLogin = useSelector((state)=>state.user).find(v=>v.on===true);
-    const nowPost = useSelector((state)=>state.post);
-    const exPosts = JSON.parse(localStorage.getItem("postList"));
-    const nowLikes = exPosts.map((i)=>i.liked);
     
     const dispatch = useDispatch();
 
 
     const LikeHandler =()=>{
-        if(nowLogin.length===0){return alert("로그인이 필요합니다")}
+        if(!nowLogin){return alert("로그인이 필요합니다")}
         
         if(!props.like.includes(nowLogin.name)){
             setLike(true);
@@ -108,6 +106,26 @@ function PostCard(props){
         }
     }
     
+    const ShareHandler=()=>{
+        if(!nowLogin){return alert("로그인이 필요합니다")}
+
+        if(!props.share.includes(nowLogin.name)){
+            setShareToggle(true);
+            
+            dispatch(postSlice.actions.ADD_SHARE({
+                id:props.id,
+                user:nowLogin.name
+            }))
+            
+        }
+        if(props.share.includes(nowLogin.name)){
+            setShareToggle(false);
+            dispatch(postSlice.actions.CANCEL_SHARE({
+                id:props.id,
+                user:nowLogin.name
+            }))
+        }
+    }
     return(
         <Wrapper>
             <Content>
@@ -125,8 +143,14 @@ function PostCard(props){
                 {props.like.includes(nowLogin?.name)?<StarFill style={{color:"#f85710"}}/>:<Star style={{color:"#f85710"}}/>}
                 <div>{props.like.length}</div>
             </ButtonItem>
-            <ButtonItem onClick={()=>{setCommendLoad((prev)=>!prev)}}><ChatDots style={{color:"green"}} /></ButtonItem>
-            <ButtonItem><ArrowRepeat style={{color:"skyblue"}}/></ButtonItem>
+            <ButtonItem onClick={()=>{setCommendLoad((prev)=>!prev)}}>
+                <ChatDots style={{color:"green"}} />
+                <div>{props.comments.length}</div>
+            </ButtonItem>
+            <ButtonItem onClick={ShareHandler}>
+                <ArrowRepeat style={{color:"skyblue"}}/>
+                <div>{props.share.length}</div>
+            </ButtonItem>
         </ButtonWrapper>
         {commentLoad?<CommentForm id={props.id} user={props.user} contents={props.contents}/>:null}
         {props.comments.map((i,index)=><li key={index}>{i.user}/{i.contents}</li>)}

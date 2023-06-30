@@ -11,13 +11,15 @@ const initialState=[
             {user:"unknown",contents:"dodo"},
         ],
         liked:[],
+        share:[],
     },  {
         id:2,
         user:"master",
         postContents:"안녕",
         hashtage:"",
         comments:[],
-        liked:[]
+        liked:[],
+        share:[],
     }
 ];
 
@@ -45,7 +47,22 @@ const postSlice =createSlice({
             const exPosts = JSON.parse(localStorage.getItem("postList"));
             exPosts[index].liked.splice(exPosts[index].liked.indexOf(action.payload.user),1);
             state[index].liked.splice(state[index].liked.indexOf(action.payload.name),1);
-        }
+            localStorage.setItem('postList',JSON.stringify(state));
+        },
+        ADD_SHARE:(state,action)=>{
+            const index = state.map((v) => v.id).indexOf(action.payload.id);
+            const exPosts = JSON.parse(localStorage.getItem("postList"));
+            exPosts[index].share.push(action.payload.user);
+            state[index].share.push(action.payload.user);
+            localStorage.setItem('postList',JSON.stringify(exPosts));
+        },
+        CANCEL_SHARE:(state,action)=>{
+            const index = state.map((v) => v.id).indexOf(action.payload.id);
+            const exPosts = JSON.parse(localStorage.getItem("postList"));
+            exPosts[index].share.splice(exPosts[index].liked.indexOf(action.payload.user),1);
+            state[index].share.splice(state[index].liked.indexOf(action.payload.name),1);
+            localStorage.setItem('postList',JSON.stringify(state));
+        },
     }
 })
 export default postSlice;

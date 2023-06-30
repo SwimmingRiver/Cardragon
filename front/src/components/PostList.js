@@ -51,7 +51,15 @@ function PostList(){
     <StyledCarousel ref={carouselRef} interval={null}>
       {Contents.map((i)=>
         <Carousel.Item key={i.id}>
-        <PostCard user={i.user} id={i.id} contents={i.postContents} hashtag={i.hashtag} comments={i.comments} like={i.liked}/>
+        <PostCard 
+          user={i.user} 
+          id={i.id} 
+          contents={i.postContents} 
+          hashtag={i.hashtag} 
+          comments={i.comments} 
+          like={i.liked}
+          share={i.share}
+          />
         </Carousel.Item>
         )}
     </StyledCarousel>
