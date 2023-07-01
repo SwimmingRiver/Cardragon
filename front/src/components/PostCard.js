@@ -137,7 +137,11 @@ function PostCard(props){
         <p>{props.contents}</p>
             </Text>
             <hr/>
-        <p>{props.hashtag}</p>
+            <Text>
+            <p>    
+            #{props.hashtag}
+            </p>
+            </Text>
         <ButtonWrapper>
             <ButtonItem onClick={LikeHandler}>
                 {props.like.includes(nowLogin?.name)?<StarFill style={{color:"#f85710"}}/>:<Star style={{color:"#f85710"}}/>}
@@ -154,6 +158,7 @@ function PostCard(props){
         </ButtonWrapper>
         {commentLoad?<CommentForm id={props.id} user={props.user} contents={props.contents}/>:null}
         {props.comments.map((i,index)=><li key={index}>{i.user}/{i.contents}</li>)}
+        
             </Content>
         </Wrapper>
     )

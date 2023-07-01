@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import PostCard from "./PostCard";
 import styled from "styled-components";
 import { Button, Carousel } from "react-bootstrap";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const CarouselWrapper = styled.div`
 
@@ -35,22 +35,25 @@ const StyledCarousel = styled(Carousel)`
     }
   }   
 `;
+const NoRes =()=>{
+  return<h1>no result</h1>
+}
 
  
 
 function PostList(){
    const UserName=useSelector((state)=>state.user);
    const Contents = useSelector((state)=>state.post);
+   const searchedKeyword = useSelector((state)=>state.search.value);
 
-   
- 
   const carouselRef = useRef(null);
    return(
    <CarouselWrapper>
     PostList
     <StyledCarousel ref={carouselRef} interval={null}>
       {Contents.map((i)=>
-        <Carousel.Item key={i.id}>
+      searchedKeyword!==""?(i.hashtag.toLowerCase() === searchedKeyword.toLowerCase()?
+       (<Carousel.Item key={i.id}>
         <PostCard 
           user={i.user} 
           id={i.id} 
@@ -60,9 +63,21 @@ function PostList(){
           like={i.liked}
           share={i.share}
           />
-        </Carousel.Item>
+        </Carousel.Item>):null
+      ):<Carousel.Item key={i.id}>
+        <PostCard 
+          user={i.user} 
+          id={i.id} 
+          contents={i.postContents} 
+          hashtag={i.hashtag} 
+          comments={i.comments} 
+          like={i.liked}
+          share={i.share}
+          />
+          </Carousel.Item>
         )}
     </StyledCarousel>
-    </CarouselWrapper>)
+    </CarouselWrapper>
+    )
 }
 export default PostList;

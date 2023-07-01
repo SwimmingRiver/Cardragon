@@ -1,15 +1,28 @@
 import { Button, Form } from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import SearchSlice from "../reducer/search";
+import { useInput } from "../hooks/UseInput";
+import { Search } from "react-bootstrap-icons";
 
-function Search(){
+
+function SearchForm(){
+    const dispatch= useDispatch();
+    const [keyword,onChangeKeyword,setKeyword]=useInput('');
+
+    const onSubmit =(e)=>{
+        e.preventDefault();
+        dispatch(SearchSlice.actions.input(keyword));
+        setKeyword("");
+    }
     return(
         <>
-        <form onSubmit={()=>{return alert("ads")}}>
-        <Form.Group>
-        <Form.Control type="text" placeholder="search..." />
-        <Button onClick={()=>{return alert("ads")}}>search</Button>
+        <form onSubmit={onSubmit}>
+        <Form.Group >
+        <Form.Control type="text" placeholder="search..." onChange={onChangeKeyword} value={keyword}/>
+        <Button><Search/></Button>
         </Form.Group>
         </form>
         </>
     )
 }
-export default Search;
+export default SearchForm;

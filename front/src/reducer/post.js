@@ -5,7 +5,7 @@ const initialState=[
         id:1,
         user:"master",//서버 만들면 사용자 개인번호 넣을지 고려해볼것
         postContents:"Hello World!!",
-        hashtage:"",
+        hashtag:"SayHi",
         comments:[
             {user:"1",contents:"hihi"},
             {user:"unknown",contents:"dodo"},
@@ -16,7 +16,7 @@ const initialState=[
         id:2,
         user:"master",
         postContents:"안녕",
-        hashtage:"",
+        hashtag:"SayHi",
         comments:[],
         liked:[],
         share:[],
