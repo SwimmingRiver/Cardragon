@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 function Home(){
     return<>
     <Wrapper>
-    Home
+    Homeㅎㅎ
     <PostForm/>
     <PostList/>
     </Wrapper>
