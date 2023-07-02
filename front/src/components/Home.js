@@ -4,7 +4,7 @@ import PostList from "./PostList";
 import Search from "./Search";
 
 const Wrapper = styled.div`
-    border: solid 1px green;
+
     height:100vh;
     width:100vw;
     display:flex;

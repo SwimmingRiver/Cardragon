@@ -3,16 +3,19 @@ import {useDispatch} from "react-redux";
 import SearchSlice from "../reducer/search";
 import { useInput } from "../hooks/UseInput";
 import { Search } from "react-bootstrap-icons";
+import { useEffect } from "react";
 
 
 function SearchForm(){
+    useEffect(()=>{
+        setKeyword("");
+    },[])
     const dispatch= useDispatch();
     const [keyword,onChangeKeyword,setKeyword]=useInput('');
 
     const onSubmit =(e)=>{
         e.preventDefault();
         dispatch(SearchSlice.actions.input(keyword));
-        setKeyword("");
     }
     return(
         <>
