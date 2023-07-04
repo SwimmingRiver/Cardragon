@@ -2,7 +2,7 @@ import Routers from "../routers/routers";
 import {Link} from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import styled from "styled-components";
-
+import {BoxArrowInRight} from 'react-bootstrap-icons'
 import { useInput } from "../hooks/UseInput";
 import userSlice from "../reducer/user";
 import SearchForm from "./Search";
@@ -48,7 +48,7 @@ function Main(){
     <Header>
     <StyledLink to="/"><h1 style={{"color":"#1565C0",fontSize:"35px"}}>Cardragon</h1></StyledLink>
     <SearchForm/>
-    {nowLogin?<Link to="/profile">profile</Link>:<Link to="/sign_in">sign_in</Link>}
+    {nowLogin?<Link to="/profile">profile</Link>:<Link to="/sign_in"><BoxArrowInRight style={{color:"black",fontSize:"50px"}}/></Link>}
     {nowLogin?<button onClick={LogOut}>logout</button>:null}
     </Header>
     <h1>main</h1>

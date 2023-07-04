@@ -22,7 +22,7 @@ function SearchForm(){
         <form onSubmit={onSubmit}>
         <Form.Group >
         <Form.Control type="text" placeholder="search..." onChange={onChangeKeyword} value={keyword}/>
-        <Button><Search/></Button>
+        <Button onClick={onSubmit}><Search/></Button>
         </Form.Group>
         </form>
         </>

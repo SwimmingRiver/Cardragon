@@ -1,10 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useInput } from "../hooks/UseInput";
 import userSlice from "../reducer/user";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
+const Wrapper = styled.div`
+  border:solid 1px black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center space-around;
+  
+  height:100vh;
+  width:60vw;
+`;
 
 const SignIn=()=>{
     const [id,setId]=useInput("");
@@ -30,12 +41,23 @@ const SignIn=()=>{
     }
     return(
     <>
-    <h1>Sign_in</h1>
+
     <form onSubmit={onSubmit}>
-    <input placeholder='id' value={id} onChange={setId}/>
-    <input placeholder='pw' value={pw} onChange={setPw}/>
+      <Wrapper>
+      <h1>Sign In</h1>
+      <div style={{paddingBottom: "10px"}}>
+    <Form.Control as='input' placeholder='id' value={id} onChange={setId}/>
+      </div>
+      <div style={{paddingBottom: "10px"}}> 
+
+    <Form.Control as='input' placeholder='pw' value={pw} onChange={setPw}/>
+      </div>
+
     <Button type="button" onClick={onSubmit}>sign in</Button>
+    <div style={{textAlign:"center"}}>
     <Link to="/sign_up">sign_up</Link>
+    </div>
+      </Wrapper>
     </form>
     </>)
   }
