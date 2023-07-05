@@ -73,6 +73,7 @@ function PostList(){
           comments={i.comments} 
           like={i.liked}
           share={i.share}
+          image={i.images}
           />
           </Carousel.Item>
         )}

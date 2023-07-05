@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState=[
     {
         id:1,
@@ -12,6 +13,7 @@ const initialState=[
         ],
         liked:[],
         share:[],
+        images:[],
     },  {
         id:2,
         user:"master",
@@ -20,6 +22,7 @@ const initialState=[
         comments:[],
         liked:[],
         share:[],
+        images:[],
     }
 ];
 

@@ -75,6 +75,20 @@ const ButtonItem=styled.div`
     }
     
 `;
+const StyledImg = styled.img`
+    width:100px;
+    height:100px;
+    
+`;
+const ImgWrapper = styled.div`
+    width:10vw;
+    height:10vh;
+    border: solid 1px black;
+`;
+
+const ZoomImage = (props)=>{
+    return <img src={props.image}/>
+}
 
 function PostCard(props){
     const [like,setLike] = useState(false);
@@ -133,6 +147,7 @@ function PostCard(props){
         <h1>{props.user}</h1>
             </Head>
             <hr/>
+            {props.image.length>0?<StyledImg src={props.image} />:null}
             <Text>
         <p>{props.contents}</p>
             </Text>
