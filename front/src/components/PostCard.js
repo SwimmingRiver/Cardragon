@@ -5,6 +5,8 @@ import { useState } from "react";
 import CommentForm from "./CommentForm";
 import { useDispatch, useSelector } from "react-redux";
 import postSlice from "../reducer/post";
+import { useNavigate } from "react-router-dom";
+import ZoomImage from "./ZoomImage";
 
 const Wrapper = styled.div`
     border: solid 1px black;
@@ -86,19 +88,17 @@ const ImgWrapper = styled.div`
     border: solid 1px black;
 `;
 
-const ZoomImage = (props)=>{
-    return <img src={props.image}/>
-}
+
 
 function PostCard(props){
     const [like,setLike] = useState(false);
     const [commentLoad,setCommendLoad] = useState(false);
     const [shareToggle,setShareToggle]=useState(false);
     const nowLogin = useSelector((state)=>state.user).find(v=>v.on===true);
+    const [zoomToggle,setZoomToggle]=useState(false);
     
     const dispatch = useDispatch();
-
-
+    const navigate = useNavigate();
     const LikeHandler =()=>{
         if(!nowLogin){return alert("로그인이 필요합니다")}
         
@@ -140,14 +140,20 @@ function PostCard(props){
             }))
         }
     }
+    const ZoomHandler=()=>{
+        setZoomToggle((prev)=>!prev)
+    }
     return(
+        <>
         <Wrapper>
+            {zoomToggle?<ZoomImage onClick={ZoomHandler} image={props.image}/>:(
             <Content>
             <Head>
         <h1>{props.user}</h1>
             </Head>
             <hr/>
-            {props.image.length>0?<StyledImg src={props.image} />:null}
+            {props.image.length>0?<StyledImg src={props.image} onClick={ZoomHandler} />:null}
+            
             <Text>
         <p>{props.contents}</p>
             </Text>
@@ -174,8 +180,8 @@ function PostCard(props){
         {commentLoad?<CommentForm id={props.id} user={props.user} contents={props.contents}/>:null}
         {props.comments.map((i,index)=><li key={index}>{i.user}/{i.contents}</li>)}
         
-            </Content>
+            </Content>)}
         </Wrapper>
-    )
+    </>)
 }
 export default PostCard;

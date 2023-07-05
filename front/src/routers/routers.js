@@ -4,6 +4,7 @@ import SignIn from "../components/SignIn";
 import Home from "../components/Home";
 import Search from "../components/Search";
 import Profile from "../components/Profile";
+import ZoomImage from "../components/ZoomImage";
 
 const Routers=()=>{
     return(
