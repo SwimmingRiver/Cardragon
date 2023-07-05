@@ -4,12 +4,11 @@ import SignIn from "../components/SignIn";
 import Home from "../components/Home";
 import Search from "../components/Search";
 import Profile from "../components/Profile";
-import ZoomImage from "../components/ZoomImage";
 
 const Routers=()=>{
     return(
     <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route exact path="/" element={<Home/>} />
         <Route path="/sign_up" element={<SignUp/>} />
         <Route path="/sign_in" element={<SignIn/>} />
         <Route path="/search" element={<Search/>}/>
