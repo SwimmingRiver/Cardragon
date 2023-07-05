@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Cardragon/static/css/main.c2cab247.css",
-    "main.js": "/Cardragon/static/js/main.8617afef.js",
+    "main.js": "/Cardragon/static/js/main.c3c9e891.js",
     "index.html": "/Cardragon/index.html",
     "main.c2cab247.css.map": "/Cardragon/static/css/main.c2cab247.css.map",
-    "main.8617afef.js.map": "/Cardragon/static/js/main.8617afef.js.map"
+    "main.c3c9e891.js.map": "/Cardragon/static/js/main.c3c9e891.js.map"
   },
   "entrypoints": [
     "static/css/main.c2cab247.css",
-    "static/js/main.8617afef.js"
+    "static/js/main.c3c9e891.js"
   ]
 }
