@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Cardragon/static/css/main.c2cab247.css",
+    "main.js": "/Cardragon/static/js/main.37592bd1.js",
+    "index.html": "/Cardragon/index.html",
+    "main.c2cab247.css.map": "/Cardragon/static/css/main.c2cab247.css.map",
+    "main.37592bd1.js.map": "/Cardragon/static/js/main.37592bd1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c2cab247.css",
+    "static/js/main.37592bd1.js"
+  ]
+}
