@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import PostCard from "./PostCard";
 import styled from "styled-components";
 import { Button, Carousel } from "react-bootstrap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CarouselWrapper = styled.div`
 
@@ -35,9 +35,6 @@ const StyledCarousel = styled(Carousel)`
     }
   }   
 `;
-const NoRes =()=>{
-  return<h1>no result</h1>
-}
 
  
 

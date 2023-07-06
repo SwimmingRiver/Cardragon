@@ -7,16 +7,16 @@ import { useEffect } from "react";
 
 
 function SearchForm(){
-    useEffect(()=>{
-        setKeyword("");
-    },[])
     const dispatch= useDispatch();
     const [keyword,onChangeKeyword,setKeyword]=useInput('');
-
+    
     const onSubmit =(e)=>{
         e.preventDefault();
         dispatch(SearchSlice.actions.input(keyword));
     }
+    useEffect(()=>{
+        setKeyword("");
+    },[])
     return(
         <>
         <form onSubmit={onSubmit}>
