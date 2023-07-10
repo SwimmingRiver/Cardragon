@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
+
+
 const initialState=[
     {
         id:1,
@@ -23,13 +25,18 @@ const initialState=[
         liked:[],
         share:[],
         images:[],
-    }
+    },
+
 ];
+
 
 const postSlice =createSlice({
     name:"post",
     initialState,
     reducers:{
+        LOAD_POST:(state,action)=>{
+            state.push(action.payload);
+        },
         ADD_POST:(state,action)=>{
             state.push(action.payload);
             localStorage.setItem("postList",JSON.stringify(state))
