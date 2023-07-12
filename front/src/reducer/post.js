@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import appleIcon from "../Images/apple-icon.png";
 
 
 
@@ -15,7 +15,7 @@ const initialState=[
         ],
         liked:[],
         share:[],
-        images:[],
+        images:[appleIcon],
     },  {
         id:2,
         user:"master",
