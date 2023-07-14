@@ -4,7 +4,7 @@ import { useSelector,useDispatch } from "react-redux";
 import styled from "styled-components";
 import {BoxArrowInRight} from 'react-bootstrap-icons'
 import { useInput } from "../hooks/UseInput";
-import userSlice from "../reducer/user";
+import {userSlice} from "../reducer/user";
 import SearchForm from "./Search";
 
 const Wrapper = styled.div`

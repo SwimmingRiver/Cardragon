@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState=[
     {
@@ -13,9 +14,17 @@ const initialState=[
         pw:"1",
         on:false,
     }
-]
+];
 
-const userSlice = createSlice({
+export const SignUpAPI = createAsyncThunk(
+    'userSlice/post',
+    async (data)=>{
+        const res = await axios.post('http://localhost:3065/user',data);
+        return res;
+    }
+)
+
+export const userSlice = createSlice({
     name:"user",
     initialState,
     reducers:{
@@ -31,7 +40,12 @@ const userSlice = createSlice({
             const index = state.map((v) => v.id).indexOf(action.payload.id);
             state[index].on = false;
           },
-    }
+    },
+    extraReducers:(builder)=>{
+        builder.addCase(SignUpAPI.fulfilled,(state,action)=>{
+            state.push(action.payload);
+            alert("Complete Sign API");
+        })
+    },
 })
 
-export default userSlice;

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "../reducer/user";
+import {userSlice} from "../reducer/user";
 import postSlice from "../reducer/post";
 import SearchSlice from "../reducer/search";
 

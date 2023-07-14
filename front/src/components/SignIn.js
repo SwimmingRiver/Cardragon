@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useInput } from "../hooks/UseInput";
-import userSlice from "../reducer/user";
+import {userSlice} from "../reducer/user";
 import { Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from "react-router-dom";
