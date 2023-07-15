@@ -19,7 +19,8 @@ router.post('/',async (req,res,next)=>{ //POST/user
         pw:hashPw,
         name:req.body.name
     });
-    res.send('ok');
+    // res.setHeader('Access-Control-Allow-Oirgin','http://localhost:3000')  3000포트만 허용
+    res.status(201).send('ok');
 
 }catch(error){
     console.error(error);
