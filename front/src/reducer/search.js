@@ -10,6 +10,9 @@ const SearchSlice=createSlice({
     reducers:{
         input:(state,action)=>{
             state.value = action.payload;
+        },
+        reset:(state)=>{
+            state.value='';
         }
     }
 })

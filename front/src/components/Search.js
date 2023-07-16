@@ -15,8 +15,9 @@ function SearchForm(){
         dispatch(SearchSlice.actions.input(keyword));
     }
     useEffect(()=>{
-        setKeyword("");
-    },[])
+        dispatch(SearchSlice.actions.reset());
+
+    },[keyword])
     return(
         <>
         <form onSubmit={onSubmit}>
