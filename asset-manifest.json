@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Cardragon/static/css/main.c2cab247.css",
-    "main.js": "/Cardragon/static/js/main.8d6f80b4.js",
+    "main.js": "/Cardragon/static/js/main.55e050a5.js",
     "static/media/apple-icon.png": "/Cardragon/static/media/apple-icon.4522d01e660ca481e454.png",
     "index.html": "/Cardragon/index.html",
     "main.c2cab247.css.map": "/Cardragon/static/css/main.c2cab247.css.map",
-    "main.8d6f80b4.js.map": "/Cardragon/static/js/main.8d6f80b4.js.map"
+    "main.55e050a5.js.map": "/Cardragon/static/js/main.55e050a5.js.map"
   },
   "entrypoints": [
     "static/css/main.c2cab247.css",
-    "static/js/main.8d6f80b4.js"
+    "static/js/main.55e050a5.js"
   ]
 }
