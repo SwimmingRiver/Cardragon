@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useInput } from "../hooks/UseInput";
-import {userSlice} from "../reducer/user";
+import {SignInAPI, userSlice} from "../reducer/user";
 import { Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from "react-router-dom";
@@ -25,18 +25,19 @@ const SignIn=()=>{
     const UserList = useSelector((state)=>state.user);
     const onSubmit=(e)=>{
       e.preventDefault();
-      if(!UserList.map((i)=>i.id).includes(id)){
-        console.error("없는 회원입니다.")
-        return alert("없는 회원입니다.");
-      }
-      if(UserList[UserList.map((i)=>i.id).indexOf(id)].pw !== pw){
-        console.error("잘못된 암호입니다.");
-        return alert("잘못된 암호입니다.");
-      }
+      // if(!UserList.map((i)=>i.id).includes(id)){
+      //   console.error("없는 회원입니다.")
+      //   return alert("없는 회원입니다.");
+      // }
+      // if(UserList[UserList.map((i)=>i.id).indexOf(id)].pw !== pw){
+      //   console.error("잘못된 암호입니다.");
+      //   return alert("잘못된 암호입니다.");
+      // }
       dispatch(userSlice.actions.USER_SIGN_IN({
         id,
         pw
-      }))
+      }));
+      dispatch(SignInAPI({id,pw}))
       navigate("/");
     }
     return(

@@ -22,7 +22,15 @@ export const SignUpAPI = createAsyncThunk(
         const res = await axios.post('http://localhost:3065/user',data);
         return res;
     }
-)
+);
+
+export const SignInAPI = createAsyncThunk(
+    'userSlice/signIn',
+    async (data)=>{
+        const res = await axios.post('http://localhost:3065/user/signin',data);
+        return res;
+    }
+);
 
 export const userSlice = createSlice({
     name:"user",
@@ -34,7 +42,7 @@ export const userSlice = createSlice({
         },
         USER_SIGN_IN:(state,action)=>{
            let index = state.map((i)=>i.id).indexOf(action.payload.id);
-           state[index].on =true
+        //    state[index].on =true;
         }, 
         USER_LOG_OUT: (state, action) => {
             const index = state.map((v) => v.id).indexOf(action.payload.id);
@@ -43,8 +51,12 @@ export const userSlice = createSlice({
     },
     extraReducers:(builder)=>{
         builder.addCase(SignUpAPI.fulfilled,(state,action)=>{
-            state.push(action.payload);
-            alert("Complete Sign API");
+            // state.push(action.payload);
+            alert("Complete Sign up API");
+        })
+        builder.addCase(SignInAPI.fulfilled,(state,action)=>{
+
+            alert("Complete Sign in API");
         })
     },
 })

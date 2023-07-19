@@ -28,12 +28,18 @@ const SignUp=()=>{
 
     const onSubmit=(e)=>{
       e.preventDefault();
-      dispatch(SignUpAPI({
+      dispatch(userSlice.actions.USER_SIGN_UP({
         id,
         pw,
         name,
         on:false,
       }))
+      dispatch(SignUpAPI({
+        id,
+        pw,
+        name,
+        on:false,
+      }));
       navigate("/sign_in");
     }
     
