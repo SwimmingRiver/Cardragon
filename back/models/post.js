@@ -1,5 +1,10 @@
 module.exports = (sequelize,DataTypes)=>{
     const Post = sequelize.define('Post',{
+        user_id:{ // 기본적으로 id가 들어있다.
+            type:DataTypes.STRING(30),
+            allowNull:false,
+            unique:true,//중복 방지
+        },
         content:{
             type:DataTypes.STRING(140),
             allowNull:false,

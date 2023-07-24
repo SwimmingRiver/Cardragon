@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useInput } from "../hooks/UseInput";
-import postSlice from "../reducer/post";
+import postSlice, { PostAPI } from "../reducer/post";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { useCallback, useRef, useState } from "react";
@@ -32,6 +32,16 @@ function PostForm(){
             share:[],
             images:uploadImage ?? uploadImage[0],
         }))
+        dispatch(PostAPI({
+          id:"",
+          user:me[0].id,
+          postContents:text,
+          hashtag,
+          comments:[],
+          liked:[],
+          share:[],
+          images:uploadImage ?? uploadImage[0],
+        }));
         setText('');
         setHashTag('');
         setUploadImage([]);

@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import appleIcon from "../Images/apple-icon.png";
-
+import axios from "axios";
 
 
 const initialState=[
@@ -28,8 +28,24 @@ const initialState=[
     },
 
 ];
-
-
+export const PostAPI = createAsyncThunk(
+    'postSlice/post',
+    async (data)=>{
+        const res = await axios.post('http://localhost:3065/post',data,{
+            withCredentials:true,
+        });
+        return res;
+    }
+);
+export const CommentAPI = createAsyncThunk(
+    'postSlice/comment',
+    async (data)=>{
+        const res = await axios.post(`http://localhost:3065/post/${data.postId}/comment`,data,{
+            withCredentials:true,
+        });
+        return res;
+   }
+)
 const postSlice =createSlice({
     name:"post",
     initialState,
@@ -73,6 +89,14 @@ const postSlice =createSlice({
             state[index].share.splice(state[index].liked.indexOf(action.payload.name),1);
             localStorage.setItem('postList',JSON.stringify(state));
         },
+    },
+    extraReducers:(builder)=>{
+        builder.addCase(PostAPI.fulfilled,(state,action)=>{
+            alert("Complete Post API");
+        })
+        builder.addCase(CommentAPI.fulfilled,(state,action)=>{
+            alert("Complete Comment API");
+        })
     }
 })
 export default postSlice;
