@@ -25,14 +25,14 @@ const SignIn=()=>{
     const UserList = useSelector((state)=>state.user);
     const onSubmit=(e)=>{
       e.preventDefault();
-      // if(!UserList.map((i)=>i.id).includes(id)){
-      //   console.error("없는 회원입니다.")
-      //   return alert("없는 회원입니다.");
-      // }
-      // if(UserList[UserList.map((i)=>i.id).indexOf(id)].pw !== pw){
-      //   console.error("잘못된 암호입니다.");
-      //   return alert("잘못된 암호입니다.");
-      // }
+      if(!UserList.map((i)=>i.id).includes(id)){
+        console.error("없는 회원입니다.")
+        return alert("없는 회원입니다.");
+      }
+      if(UserList[UserList.map((i)=>i.id).indexOf(id)].pw !== pw){
+        console.error("잘못된 암호입니다.");
+        return alert("잘못된 암호입니다.");
+      }
       dispatch(userSlice.actions.USER_SIGN_IN({
         id,
         pw

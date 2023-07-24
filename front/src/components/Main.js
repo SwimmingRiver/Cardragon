@@ -4,7 +4,7 @@ import { useSelector,useDispatch } from "react-redux";
 import styled from "styled-components";
 import {BoxArrowInRight} from 'react-bootstrap-icons'
 import { useInput } from "../hooks/UseInput";
-import {userSlice} from "../reducer/user";
+import {LogOutAPI, userSlice} from "../reducer/user";
 import SearchForm from "./Search";
 
 const Wrapper = styled.div`
@@ -39,9 +39,9 @@ function Main(){
     const nowLogin = useSelector((state)=>state.user).find(v=>v.on===true);
     
     const LogOut=()=>{
-        console.log(nowLogin)
         let index = me.map((v)=>v.on).indexOf(true);
         dispatch(userSlice.actions.USER_LOG_OUT(me[index]));
+        dispatch(LogOutAPI())
     }
 
     return<>

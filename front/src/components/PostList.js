@@ -48,9 +48,9 @@ function PostList(){
    <CarouselWrapper>
     PostList
     <StyledCarousel ref={carouselRef} interval={null}>
-      {Contents.map((i)=>
+      {Contents.map((i,index)=>
       searchedKeyword!==""?(i.hashtag.toLowerCase() === searchedKeyword.toLowerCase()?
-       (<Carousel.Item key={i.id}>
+       (<Carousel.Item key={index}>
         <PostCard 
           user={i.user} 
           id={i.id} 
@@ -62,7 +62,7 @@ function PostList(){
           image={i.images}
           />
         </Carousel.Item>):null
-      ):<Carousel.Item key={i.id}>
+      ):<Carousel.Item key={index}>
         <PostCard 
           user={i.user} 
           id={i.id} 

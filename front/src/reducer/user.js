@@ -32,6 +32,14 @@ export const SignInAPI = createAsyncThunk(
     }
 );
 
+export const LogOutAPI = createAsyncThunk(
+    'userSlice/logOut',
+    async (data)=>{
+        const res = await axios.post('http://localhost:3065/user/logout');
+        return res;
+    }
+);
+
 export const userSlice = createSlice({
     name:"user",
     initialState,
@@ -42,7 +50,16 @@ export const userSlice = createSlice({
         },
         USER_SIGN_IN:(state,action)=>{
            let index = state.map((i)=>i.id).indexOf(action.payload.id);
-        //    state[index].on =true;
+           state[index].on =true;
+           const getUserList = JSON.parse(localStorage.getItem('userList'));
+           const updatedUserList = getUserList.map((user,num) => {
+            if (num === index) {
+              return { ...user, on: true }; // on 값을 true로 변경 (원하는 값으로 변경 가능)
+            } else {
+              return user; // 변경할 필요가 없는 경우 기존 객체 그대로 반환
+            }
+          });
+          localStorage.setItem('userList',JSON.stringify(updatedUserList))
         }, 
         USER_LOG_OUT: (state, action) => {
             const index = state.map((v) => v.id).indexOf(action.payload.id);
@@ -51,12 +68,15 @@ export const userSlice = createSlice({
     },
     extraReducers:(builder)=>{
         builder.addCase(SignUpAPI.fulfilled,(state,action)=>{
-            // state.push(action.payload);
+
             alert("Complete Sign up API");
         })
         builder.addCase(SignInAPI.fulfilled,(state,action)=>{
 
             alert("Complete Sign in API");
+        })
+        builder.addCase(LogOutAPI.fulfilled,(state,action)=>{
+            alert('Complete Log out API');
         })
     },
 })
