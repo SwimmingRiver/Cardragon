@@ -19,23 +19,29 @@ const initialState=[
 export const SignUpAPI = createAsyncThunk(
     'userSlice/post',
     async (data)=>{
-        const res = await axios.post('http://localhost:3065/user',data);
-        return res;
+        const res = await axios.post('http://localhost:3065/user',data,{
+            withCredentials:true,
+        });
+        return res.body;
     }
 );
 
 export const SignInAPI = createAsyncThunk(
     'userSlice/signIn',
     async (data)=>{
-        const res = await axios.post('http://localhost:3065/user/signin',data);
-        return res;
+        const res = await axios.post('http://localhost:3065/user/signin',data,{
+            withCredentials:true,
+        });
+        return res.body;
     }
 );
 
 export const LogOutAPI = createAsyncThunk(
     'userSlice/logOut',
     async (data)=>{
-        const res = await axios.post('http://localhost:3065/user/logout');
+        const res = await axios.post('http://localhost:3065/user/logout',{
+            withCredentials:true,
+        });
         return res;
     }
 );
