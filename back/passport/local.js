@@ -4,12 +4,12 @@ const {User}=require('../models');
 const bcrpyt = require('bcrypt');
 module.exports=()=>{
     passport.use(new Strategy({
-        usernameField:'id',
+        usernameField:'user_id',
         passwordField:'pw',
-    },async (id,password,done)=>{
+    },async (user_id,password,done)=>{
      try{
         const user = await User.findOne({
-            where:{user_id:id}
+            where:{user_id}
         });
         if(!user){
           return done(null,false,{reason:'존재하지 않는 사용자입니다.'});

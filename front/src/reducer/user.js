@@ -1,20 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState=[
+const initialState=
     {
-        id:"master",
-        name:"master",
-        pw:"1",
-        on:false,
-    },
-    {
-        id:"1",
-        name:"1",
-        pw:"1",
-        on:false,
-    }
-];
+        me:null,
+        UserList:[],
+    };
+
+    export const LoadUserListAPI = createAsyncThunk(
+        'userSlice/loadUserLIst',
+        async (data) => {
+          try {
+            const res = await axios.get('http://localhost:3065/user', {
+              withCredentials: true,
+            });
+            return res.data; // 데이터 반환
+          } catch (error) {
+            throw(error)
+          }
+        }
+      );
 
 export const SignUpAPI = createAsyncThunk(
     'userSlice/post',
@@ -22,7 +27,7 @@ export const SignUpAPI = createAsyncThunk(
         const res = await axios.post('http://localhost:3065/user',data,{
             withCredentials:true,
         });
-        return res.body;
+        return res.data;
     }
 );
 
@@ -32,7 +37,7 @@ export const SignInAPI = createAsyncThunk(
         const res = await axios.post('http://localhost:3065/user/signin',data,{
             withCredentials:true,
         });
-        return res.body;
+        return res.data;
     }
 );
 
@@ -42,9 +47,18 @@ export const LogOutAPI = createAsyncThunk(
         const res = await axios.post('http://localhost:3065/user/logout',{
             withCredentials:true,
         });
-        return res;
+        return res.body;
     }
 );
+export const LoadMyInfoAPI = createAsyncThunk(
+    'userSlice/loadMyInfo',
+    async ()=>{
+        const res =  await axios.get('http://localhost:3065/user',{
+            withCredentials:true,
+        })
+        return res.body;
+    }
+)
 
 export const userSlice = createSlice({
     name:"user",
@@ -73,16 +87,23 @@ export const userSlice = createSlice({
           },
     },
     extraReducers:(builder)=>{
+        builder.addCase(LoadUserListAPI.fulfilled, (state, action) => {
+            localStorage.setItem('userList', JSON.stringify(action.payload)); // action.payload로 변경
+            return { ...state, UserList: action.payload }; // action.payload로 변경
+          });
         builder.addCase(SignUpAPI.fulfilled,(state,action)=>{
-
             alert("Complete Sign up API");
         })
         builder.addCase(SignInAPI.fulfilled,(state,action)=>{
+            state.me = action.payload;
 
             alert("Complete Sign in API");
         })
         builder.addCase(LogOutAPI.fulfilled,(state,action)=>{
             alert('Complete Log out API');
+        })
+        builder.addCase(LoadMyInfoAPI.fulfilled,()=>{
+            // console.log("load it")
         })
     },
 })

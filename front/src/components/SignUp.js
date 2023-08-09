@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { userSlice,SignUpAPI } from "../reducer/user";
+import { userSlice,SignUpAPI, LoadUserListAPI } from "../reducer/user";
 
 const Wrapper =styled.div`
   border:solid 1px black;
@@ -28,18 +28,12 @@ const SignUp=()=>{
 
     const onSubmit=(e)=>{
       e.preventDefault();
-      dispatch(userSlice.actions.USER_SIGN_UP({
-        id,
-        pw,
-        name,
-        on:false,
-      }))
       dispatch(SignUpAPI({
-        id,
+        user_id:id,
         pw,
         name,
-        on:false,
       }));
+      dispatch(LoadUserListAPI());
       navigate("/sign_in");
     }
     

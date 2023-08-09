@@ -28,13 +28,14 @@ const initialState=[
     },
 
 ];
+
 export const PostAPI = createAsyncThunk(
     'postSlice/post',
     async (data)=>{
         const res = await axios.post('http://localhost:3065/post',data,{
             withCredentials:true,
         });
-        return res;
+        return res.body;
     }
 );
 export const CommentAPI = createAsyncThunk(

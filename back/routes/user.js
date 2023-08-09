@@ -1,9 +1,29 @@
 const express = require('express');
 const bcrpyt = require('bcrypt');
-const {User}=require('../models')
+const {User, Post}=require('../models')
 const passport = require('passport');
 
 const router = express.Router();
+
+router.get('/',async(req,res,next)=>{
+   try{
+    if(req.user){
+        const fullUserWithoutPassword = await User.findOne({
+            where:{id:req.user.id},
+            attributes:{
+                exclude:['pw']
+            },
+        });
+        res.status(200).json(fullUserWithoutPassword);
+    }else{
+        res.status(200).json(null);
+    }
+    
+    }catch(error){
+        console.error(error);
+        next(error);
+    }
+})
 
 const {isLoggedIn,isNotLoggedIn} = require('./middlewares');
 
@@ -36,7 +56,7 @@ router.post('/',isNotLoggedIn,async (req,res,next)=>{ //POST/user
     try{
         const exUser = await User.findOne({
             where:{
-                user_id:req.body.id,
+                user_id:req.body.user_id,
             }
         })
         if(exUser){
@@ -44,10 +64,9 @@ router.post('/',isNotLoggedIn,async (req,res,next)=>{ //POST/user
         }
     const hashPw = await bcrpyt.hash(req.body.pw,12);
     await User.create({
-        user_id:req.body.id,
+        user_id:req.body.user_id,
         pw:hashPw,
         name:req.body.name,
-        on:req.body.on
     });
     // res.setHeader('Access-Control-Allow-Oirgin','http://localhost:3000')  3000포트만 허용
     res.status(201).send('ok');

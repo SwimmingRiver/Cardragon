@@ -1,7 +1,7 @@
 import {useInput} from '../hooks/UseInput';
 import { Form } from 'react-bootstrap';
 import { useSelector,useDispatch } from 'react-redux';
-import postSlice from '../reducer/post';
+import postSlice, { CommentAPI } from '../reducer/post';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -20,9 +20,14 @@ function CommentForm(props){
             {
                 id:props.id,
                 user:nowLogin.name,
-                comments:comment
+                comments:comment,
             }  
         ))
+        dispatch(CommentAPI({
+            id:props.id,
+                user:nowLogin.name,
+                comments:comment
+        }))
         setComment('');
     }
     return<>

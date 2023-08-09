@@ -21,30 +21,30 @@ const ProfileCard = styled.div`
   
 `;
 function Profile(){
-    const nowLogin = useSelector((state)=>state.user).find(v=>v.on===true).name;
-    const nowPosts = useSelector(state=>state.post).filter(v=>v.user===nowLogin);
+    const {me} = useSelector((state)=>state.user)
     const posts = useSelector(state=>state.post);
-    const nowComments = posts.filter(post =>
-        post.comments.some(comment => comment.user === nowLogin)
-      );
-    const nowLikes = posts.filter(v => v.liked.includes(nowLogin));
-    
-
+    // const nowComments = posts.filter(post =>
+    //     post.comments.some(comment => comment.user === nowLogin)
+    //   );
+    // const nowLikes = posts.filter(v => v.liked.includes(nowLogin));
+    if(!me){
+        return 'loading user data...';
+    }
     return(
     <Wrapper>
     <ProfileCard>
     <div>
-    <h1>{nowLogin}'s profile</h1>
+    <h1>{me.name}'s profile</h1>
     </div>
-    <h2>{nowLogin}'s posts</h2>
-    {nowPosts? nowPosts.map((i)=><li>{i.postContents}</li>):"post your contents"}
+    <h2>{me.name}'s posts</h2>
+    {/* {nowPosts? nowPosts.map((i)=><li>{i.postContents}</li>):"post your contents"} */}
     <div>
-    <h2>{nowLogin}'s comments</h2>
-    {nowComments.map((i)=><li>{i.user}/{i.postContents}</li>)}
+    <h2>{me.name}'s comments</h2>
+    {/* {nowComments.map((i)=><li>{i.user}/{i.postContents}</li>)} */}
     </div>
     <div>
-    <h2>{nowLogin}'s like</h2>
-    {nowLikes.map((i)=><li>{i.user}/{i.postContents}</li>)}
+    <h2>{me.name}'s like</h2>
+    {/* {nowLikes.map((i)=><li>{i.user}/{i.postContents}</li>)} */}
     </div>
     </ProfileCard>
     </Wrapper>

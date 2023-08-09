@@ -12,7 +12,7 @@ function PostForm(){
     const navigate = useNavigate();
 
     const imageInput = useRef();
-    const me = useSelector((state)=>state.user).filter((v)=>v.on===true);
+    const {me} = useSelector((state)=>state.user);
     const [uploadImage,setUploadImage] = useState([]);
 
     const onSubmit=(e)=>{
@@ -22,19 +22,9 @@ function PostForm(){
            return alert("로그인이 필요합니다."); 
         }
         if(text !== ""&& hashtag!==""){
-        dispatch(postSlice.actions.ADD_POST({
-            id:"",
-            user:me[0].id,
-            postContents:text,
-            hashtag,
-            comments:[],
-            liked:[],
-            share:[],
-            images:uploadImage ?? uploadImage[0],
-        }))
+    
         dispatch(PostAPI({
-          id:"",
-          user:me[0].id,
+          UserId:me.id,
           postContents:text,
           hashtag,
           comments:[],

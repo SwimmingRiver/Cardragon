@@ -94,49 +94,49 @@ function PostCard(props){
     const [like,setLike] = useState(false);
     const [commentLoad,setCommendLoad] = useState(false);
     const [shareToggle,setShareToggle]=useState(false);
-    const nowLogin = useSelector((state)=>state.user).find(v=>v.on===true);
+    const {me} = useSelector((state)=>state.user);
     const [zoomToggle,setZoomToggle]=useState(false);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const LikeHandler =()=>{
-        if(!nowLogin){return alert("로그인이 필요합니다")}
+        if(!me){return alert("로그인이 필요합니다")}
         
-        if(!props.like.includes(nowLogin.name)){
+        if(!props.like.includes(me.name)){
             setLike(true);
             
             dispatch(postSlice.actions.ADD_LIKE({
                 id:props.id,
-                user:nowLogin.name
+                user:me.name
             }))
             
         }
-        if(props.like.includes(nowLogin.name)){
+        if(props.like.includes(me.name)){
             setLike(false);
             dispatch(postSlice.actions.CANCEL_LIKE({
                 id:props.id,
-                user:nowLogin.name
+                user:me.name
             }))
         }
     }
     
     const ShareHandler=()=>{
-        if(!nowLogin){return alert("로그인이 필요합니다")}
+        if(!me){return alert("로그인이 필요합니다")}
 
-        if(!props.share.includes(nowLogin.name)){
+        if(!props.share.includes(me.name)){
             setShareToggle(true);
             
             dispatch(postSlice.actions.ADD_SHARE({
                 id:props.id,
-                user:nowLogin.name
+                user:me.name
             }))
             
         }
-        if(props.share.includes(nowLogin.name)){
+        if(props.share.includes(me.name)){
             setShareToggle(false);
             dispatch(postSlice.actions.CANCEL_SHARE({
                 id:props.id,
-                user:nowLogin.name
+                user:me.name
             }))
         }
     }
@@ -165,7 +165,7 @@ function PostCard(props){
             </Text>
         <ButtonWrapper>
             <ButtonItem onClick={LikeHandler}>
-                {props.like.includes(nowLogin?.name)?<StarFill style={{color:"#f85710"}}/>:<Star style={{color:"#f85710"}}/>}
+                {props.like.includes(me?.name)?<StarFill style={{color:"#f85710"}}/>:<Star style={{color:"#f85710"}}/>}
                 <div>{props.like.length}</div>
             </ButtonItem>
             <ButtonItem onClick={()=>{setCommendLoad((prev)=>!prev)}}>

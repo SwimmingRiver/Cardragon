@@ -34,9 +34,8 @@ const StyledLink = styled(Link)`
 
 function Main(){
     const dispatch = useDispatch();
-    const me = useSelector((state)=>state.user);
+    const {me} = useSelector((state)=>state.user);
     const posts = useSelector((state)=>state.post);
-    const nowLogin = useSelector((state)=>state.user).find(v=>v.on===true);
     
     const LogOut=()=>{
         let index = me.map((v)=>v.on).indexOf(true);
@@ -48,8 +47,8 @@ function Main(){
     <Header>
     <StyledLink to="/"><h1 style={{"color":"#1565C0",fontSize:"35px"}}>Cardragon</h1></StyledLink>
     <SearchForm/>
-    {nowLogin?<Link to="/profile">profile</Link>:<Link to="/sign_in"><BoxArrowInRight style={{color:"black",fontSize:"50px"}}/></Link>}
-    {nowLogin?<button onClick={LogOut}>logout</button>:null}
+    {me?<Link to="/profile">profile</Link>:<Link to="/sign_in"><BoxArrowInRight style={{color:"black",fontSize:"50px"}}/></Link>}
+    {me?<button onClick={LogOut}>logout</button>:null}
     </Header>
     <h1>main</h1>
     <Wrapper>

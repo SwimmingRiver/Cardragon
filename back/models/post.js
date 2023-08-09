@@ -1,26 +1,29 @@
-module.exports = (sequelize,DataTypes)=>{
-    const Post = sequelize.define('Post',{
-        user_id:{ // 기본적으로 id가 들어있다.
-            type:DataTypes.STRING(30),
-            allowNull:false,
-            unique:true,//중복 방지
-        },
-        content:{
-            type:DataTypes.STRING(140),
-            allowNull:false,
-        },
+const DataTypes = require('sequelize');
+const { Model } = DataTypes;
 
-    },{
-        charset:'utf8mb4',
-        collate:'utf8mb4_general_ci',
+module.exports = class Post extends Model {
+  static init(sequelize) {
+    return super.init({
+      // id가 기본적으로 들어있다.
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+
+    }, {
+      modelName: 'Post',
+      tableName: 'posts',
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_general_ci', // 이모티콘 저장
+      sequelize,
     });
-    Post.assciate=(db)=>{
-        db.Post.belongsTo(db.User);
-        db.Post.belongsToMany(db.Hashtag,{through:'PostHashtag'});
-        db.Post.hasMany(db.Commnent);
-        db.Post.hasMany(db.Image);
-        db.Post.belongsToMany(db.User,{through:'Like',as:'Likers'});
-        db.Post.belongsTo(db.Post,{as:"Shared"});
-    }
-    return Post;
-}
+  }
+  static associate(db) {
+    db.Post.belongsTo(db.User); // post.addUser, post.getUser, post.setUser
+    db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' }); // post.addHashtags
+    db.Post.hasMany(db.Comment); // post.addComments, post.getComments
+    db.Post.hasMany(db.Image); // post.addImages, post.getImages
+    db.Post.belongsToMany(db.User, { through: 'Like', as: 'Likers' }) // post.addLikers, post.removeLikers
+    db.Post.belongsTo(db.Post,{as:'Shared'});
+  }
+};
