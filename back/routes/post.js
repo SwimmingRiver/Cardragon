@@ -16,8 +16,14 @@ router.post('/',isLoggedIn,async(req,res,next)=>{
             model:Image,
         },{
             model:Comment,
+            attributes: ['id', 'name'],
         },{
             model:User,
+            attributes: ['id', 'name'],
+        },{
+          model: User, // 좋아요 누른 사람
+          as: 'Likers',
+          attributes: ['id'],
         }]
      })
      res.status(201).json(fullPost);

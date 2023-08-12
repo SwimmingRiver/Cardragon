@@ -19,40 +19,11 @@ const Wrapper = styled.div`
 
 
 function App() {
-  const me = useSelector((state)=>state.user);
+  const {me} = useSelector((state)=>state.user);
   const posts = useSelector((state)=>state.post);
   const dispatch = useDispatch();
 
-  const dummyUrl = "https://jsonplaceholder.typicode.com/posts";
-  const [dummyData,setDummyData]=useState([]);
-
-  const LoadDummyData=async()=>{
-    try{
-      const res = await axios.get(dummyUrl);
-    const arr = res.data;
-    const dummyArr = arr.filter((v)=>v.id<5)
-    dummyArr.map((i)=>
-    dispatch(postSlice.actions.ADD_POST({
-      id:i.id+2,
-        user:i.userId,
-        postContents:i.title,
-        hashtag:"Dummy",
-        comments:[
-        ],
-        liked:[],
-        share:[],
-        images:[],
-    }))
-    )
-    }catch(error){
-      console.error(error);
-    }
-    
-  }
-useEffect(()=>{
-  LoadDummyData();  
-},[])
-
+ 
   useEffect(()=>{
     dispatch(LoadUserListAPI());
     localStorage.setItem("postList",JSON.stringify(posts));

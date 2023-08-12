@@ -35,7 +35,7 @@ export const PostAPI = createAsyncThunk(
         const res = await axios.post('http://localhost:3065/post',data,{
             withCredentials:true,
         });
-        return res.body;
+        return res.data;
     }
 );
 export const CommentAPI = createAsyncThunk(

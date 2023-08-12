@@ -9,6 +9,10 @@ module.exports = class Post extends Model {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      UserId:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+      }
 
     }, {
       modelName: 'Post',
